@@ -7,28 +7,35 @@ export default defineConfig({
   initialState: {},
   request: {},
   layout: {
-    title: '@umijs/max',
+    title: 'Rustdesk 管理后台',
   },
   routes: [
     {
       path: '/',
-      redirect: '/home',
+      redirect: '/update',
     },
     {
-      name: '首页',
-      path: '/home',
-      component: './Home',
-    },
-    {
-      name: '权限演示',
-      path: '/access',
-      component: './Access',
-    },
-    {
-      name: ' CRUD 示例',
-      path: '/table',
-      component: './Table',
+      name: '更新管理',
+      path: '/update',
+      routes: [
+        {
+          name: '设备信息',
+          path: '/update/device',
+          component: './update/device',
+        },
+        {
+          name: '审查记录',
+          path: '/update/review',
+          component: './update/review',
+        },
+        {
+          name: '软件配置',
+          path: '/update/software',
+          component: './update/software',
+        },
+      ],
     },
   ],
   npmClient: 'yarn',
+  mock: false,
 });
