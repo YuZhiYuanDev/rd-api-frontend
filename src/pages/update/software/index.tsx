@@ -3,6 +3,7 @@ import services from '@/services/update';
 import {
   ActionType,
   PageContainer,
+  ProColumns,
   ProForm,
   ProFormSelect,
   ProFormText,
@@ -68,7 +69,7 @@ const SoftwareConfig: React.FC = () => {
     }
   };
 
-  const columns = [
+  const columns: ProColumns<API.SoftwareDownload>[] = [
     {
       title: '操作系统',
       dataIndex: 'os',
@@ -87,6 +88,11 @@ const SoftwareConfig: React.FC = () => {
     {
       title: '类型',
       dataIndex: 'typ',
+      search: true,
+    },
+    {
+      title: '版本号',
+      dataIndex: 'version',
       search: true,
     },
     {
@@ -133,7 +139,7 @@ const SoftwareConfig: React.FC = () => {
   ];
 
   const typeOptions = [
-    { label: 'exe', value: 'exe' },
+    { label: 'rustdesk-client', value: 'rustdesk-client' },
     { label: 'msi', value: 'msi' },
   ];
 
@@ -166,7 +172,9 @@ const SoftwareConfig: React.FC = () => {
       >
         <ProForm
           initialValues={formValues}
-          onValuesChange={(_, allValues) => setFormValues(allValues)}
+          onValuesChange={(_, allValues) =>
+            setFormValues(allValues as API.SoftwareDownload)
+          }
           onFinish={handleSubmit}
           layout="vertical"
           submitter={false}
@@ -193,6 +201,14 @@ const SoftwareConfig: React.FC = () => {
             label="类型"
             options={typeOptions}
             rules={[{ required: true, message: '请选择类型' }]}
+          />
+          <ProFormText
+            name="version"
+            label="软件版本"
+            rules={[
+              { required: true, message: '请输入软件版本号' },
+              { whitespace: true, message: '版本号不能包含空格' },
+            ]}
           />
           <ProFormText
             name="download_url"
