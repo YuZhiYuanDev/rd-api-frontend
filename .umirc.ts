@@ -7,7 +7,7 @@ export default defineConfig({
   initialState: {},
   request: {},
   layout: {
-    title: 'Rustdesk 管理后台',
+    title: 'RustDesk 管理后台',
   },
   routes: [
     {
